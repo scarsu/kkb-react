@@ -3,6 +3,7 @@ import store from "../store/";
 
 export default class ReduxPage extends Component {
   componentDidMount() {
+    console.log(store)
     this.unsubscribe = store.subscribe(() => {
       // store state 改变
       this.forceUpdate();
@@ -40,11 +41,14 @@ export default class ReduxPage extends Component {
   render() {
     return (
       <div>
-        <h3>ReduxPage</h3>
-        <p>{store.getState()}</p>
-        <button onClick={this.add}>add</button>
-        <button onClick={this.asyAdd}>asyAdd</button>
-        <button onClick={this.promiseMinus}>promise minus</button>
+        <h3>ReduxPage： combineReducers 分key管理state</h3>
+        <h3>暗号：毛里塔尼亚</h3>
+        <p>firstName ===== {store.getState().firstName}</p>
+        <p>lastName ===== {store.getState().lastName}</p>
+        <p>fullName ===== {store.getState().firstName + '  ' + store.getState().lastName}</p>
+        <button onClick={this.add}>change</button>
+        {/* <button onClick={this.asyAdd}>asyAdd</button>
+        <button onClick={this.promiseMinus}>promise minus</button> */}
       </div>
     );
   }
