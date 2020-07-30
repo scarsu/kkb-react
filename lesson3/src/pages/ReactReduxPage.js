@@ -4,24 +4,31 @@ import React, {Component} from "react";
 import {connect, bindActionCreators} from "../kReactRedux";
 
 @connect(
-  // mapStateToProps
+  // connect第一个参数：mapStateToProps函数
+  // 将store映射到组件props上
+  // 传入对象 返回对象
   ({count}) => ({count}),
-  // mapDispatchToProps object | function
-  {
-    add: () => ({type: "ADD"})
-  }
-  // dispatch => {
-  //   let creators = {
-  //     add: () => ({type: "ADD"}),
-  //     minus: () => ({type: "MINUS"})
-  //   };
-  //   creators = bindActionCreators(creators, dispatch);
 
-  //   return {
-  //     dispatch,
-  //     ...creators
-  //   };
+  // connect第二个参数：mapDispatchToProps object对象 或者 函数function
+  // object对象：
+  // {
+  //   add: () => ({type: "ADD"})
+  //   会给组件上添加一个add方法
   // }
+  // 函数function：
+  // 会给组件上添加一个dispatch方法
+  dispatch => {
+    let creators = {
+      add: () => ({type: "ADD"}),
+      minus: () => ({type: "MINUS"})
+    };
+    creators = bindActionCreators(creators, dispatch);
+
+    return {
+      dispatch,
+      ...creators
+    };
+  }
 )
 class ReactReduxPage extends Component {
   render() {
